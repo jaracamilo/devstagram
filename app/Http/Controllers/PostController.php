@@ -6,7 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
-
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller implements HasMiddleware
@@ -14,7 +14,7 @@ class PostController extends Controller implements HasMiddleware
 
     public static function middleware(){
         return [
-            'auth',
+            new Middleware('auth', except:['show','index'] ),
         ];
     }
     public function index(User $user){
